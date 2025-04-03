@@ -34,9 +34,9 @@ pipeline {
             }
         }
 
-        stage('Archive Results') {
+        stage('Archive Results and Images') {
             steps {
-                archiveArtifacts artifacts: 'output/*.txt', fingerprint: true
+                archiveArtifacts artifacts: 'output/*.txt, output/*.png', fingerprint: true
             }
         }
     }
