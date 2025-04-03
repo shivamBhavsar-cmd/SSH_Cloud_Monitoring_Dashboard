@@ -1,18 +1,19 @@
-# ddos_attack_detection.py
-import time
+import matplotlib.pyplot as plt
 
-def detect_ddos_attack():
-    # Simulate some processing time
-    time.sleep(1)
-    # Hardcoded output as per your request
-    output = """Detected Attacks: {'Normal', 'UDP-Lag', 'DNS', 'SYN'}
+# Sample data (Replace this with real detection data)
+ddos_requests = [100, 250, 300, 500, 700]
+timestamps = ["10:00", "10:10", "10:20", "10:30", "10:40"]
 
-Automated Mitigation Plan:
-- Mitigation: Use a firewall to block unwanted UDP traffic.
-- Mitigation: Rate-limit DNS queries, enable DNSSEC.
-- Mitigation: Enable SYN Cookies, Limit Connection Rate."""
-    return output
+# Create the plot
+plt.figure(figsize=(8, 5))
+plt.plot(timestamps, ddos_requests, marker='o', linestyle='-', color='b', label='DDoS Requests')
+plt.xlabel("Time")
+plt.ylabel("Number of Requests")
+plt.title("DDoS Attack Intensity Over Time")
+plt.legend()
 
-if __name__ == "__main__":
-    result = detect_ddos_attack()
-    print(result)
+# Save the plot as an image
+output_path = "output/ddos_attack_distribution.png"
+plt.savefig(output_path)
+print(f"DDoS attack distribution image saved: {output_path}")
+plt.close()
