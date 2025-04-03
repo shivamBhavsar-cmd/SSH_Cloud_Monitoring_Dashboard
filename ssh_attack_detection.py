@@ -1,33 +1,19 @@
-# ssh_attack_detection.py
-import time
+import matplotlib.pyplot as plt
 
-def detect_ssh_attack():
-    # Simulate some processing time
-    time.sleep(1)
-    # Hardcoded output as per your request
-    output = """Predicting attacks...
-Visualizing results...
-Providing mitigation steps...
-Data row 0: Predicted Attack Type: PortScan
-1. Use firewalls to block unused ports.
-2. Set up intrusion detection and prevention systems (IDS/IPS).
-3. Regularly monitor network traffic for unusual activities.
---------------------------------------------------
-Data row 1: Predicted Attack Type: Infiltration
-1. Update all software to patch vulnerabilities.
-2. Use strong authentication and encryption protocols.
-3. Monitor for suspicious activity.
---------------------------------------------------
-Data row 2: Predicted Attack Type: Benign
-No malicious activity detected.
---------------------------------------------------
-Data row 3: Predicted Attack Type: DDoS
-1. Implement rate limiting.
-2. Use firewalls or intrusion detection systems (IDS).
-3. Block malicious IPs or patterns.
-4. Employ anti-DDoS protection services."""
-    return output
+# Sample data (Replace this with real detection data)
+ssh_attempts = [10, 15, 30, 25, 40]
+timestamps = ["10:00", "10:10", "10:20", "10:30", "10:40"]
 
-if __name__ == "__main__":
-    result = detect_ssh_attack()
-    print(result)
+# Create the plot
+plt.figure(figsize=(8, 5))
+plt.plot(timestamps, ssh_attempts, marker='o', linestyle='-', color='r', label='SSH Attack Attempts')
+plt.xlabel("Time")
+plt.ylabel("Number of Attempts")
+plt.title("SSH Attack Attempts Over Time")
+plt.legend()
+
+# Save the plot as an image
+output_path = "output/ssh_attack_distribution.png"
+plt.savefig(output_path)
+print(f"SSH attack distribution image saved: {output_path}")
+plt.close()
