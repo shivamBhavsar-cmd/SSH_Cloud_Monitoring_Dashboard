@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cloud-monitoring-dashboard
+  labels:
+    app: cloud-monitoring-dashboard
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cloud-monitoring-dashboard
+  template:
+    metadata:
+      labels:
+        app: cloud-monitoring-dashboard
+    spec:
+      serviceAccountName: cloud-monitoring-dashboard-sa
+      containers:
+      - name: cloud-monitoring-dashboard
+        image: your-docker-registry/cloud-monitoring-dashboard:latest # Replace with your Docker image
+        ports:
+        - containerPort: 3000
+        envFrom:
+        - secretRef:
+            name: supabase-credentials
+        - configMapRef:
+            name: app-config
+        resources:
+          requests:
+            memory: "128Mi"
+            cpu: "250m"
+          limits:
+            memory: "256Mi"
+            cpu: "500m"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 15
+          periodSeconds: 20
+      tolerations:
+      - key: "app"
+        operator: "Equal"
+        value: "monitoring"
+        effect: "NoSchedule"
