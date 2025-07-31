@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: cloud-monitoring-vs
+spec:
+  hosts:
+  - "your-domain.com" # Replace with your domain name
+  gateways:
+  - cloud-monitoring-gateway
+  http:
+  - route:
+    - destination:
+        host: cloud-monitoring-dashboard-svc
+        port:
+          number: 80

@@ -1,0 +1,11 @@
+apiVersion: "autoscaling.k8s.io/v1"
+kind: VerticalPodAutoscaler
+metadata:
+  name: cloud-monitoring-dashboard-vpa
+spec:
+  targetRef:
+    apiVersion: "apps/v1"
+    kind:       Deployment
+    name:       cloud-monitoring-dashboard
+  updatePolicy:
+    updateMode: "Auto"
